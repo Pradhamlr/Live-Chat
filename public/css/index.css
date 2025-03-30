@@ -1,0 +1,205 @@
+/* General body styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #17141d, #1f1a29);
+    color: #e8d7ff; /* Soft lavender tone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Main container */
+.container {
+    width: 90%;
+    max-width: 900px; /* Made wider */
+    padding: 30px;
+    background: rgba(35, 30, 50, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(150, 110, 255, 0.2);
+    text-align: center;
+}
+
+/* Room Management Section - Flex Layout */
+.room-management {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Room Cards */
+.room-card {
+    position: relative;
+    flex: 1;
+    background: rgba(50, 40, 65, 0.9);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(180, 140, 255, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.room-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(180, 140, 255, 0.3);
+}
+
+/* Room List Section */
+#roomDetails {
+    display: none;
+    text-align: left;
+    background: rgba(50, 40, 65, 0.9);
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 30px;
+    box-shadow: 0 4px 12px rgba(180, 140, 255, 0.15);
+    width: 100%;
+}
+
+/* Room List - Spacing Between Details */
+#room-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spacing between room detail cards */
+}
+
+.avatar-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align image and text */
+    gap: 10px; /* Space between avatar and text */
+    padding: 5px 10px;
+    background: #c6c6c6; 
+    border-radius: 25px;
+    background: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2)
+}
+
+#user-avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+
+#avatar-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #c8c7c7;
+    margin-left: 10px;
+    margin-right: 10px;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+
+
+.enter-room-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.enter-room-btn img {
+    width: 20px; /* Decreased size */
+    height: 20px;
+    filter: brightness(0) invert(1); /* Makes the icon white */
+}
+
+.enter-room-btn:hover {
+    transform: scale(1.1);
+}
+
+.delete-room-btn img {
+    width: 22px; /* Increased size */
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+
+.delete-room-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.delete-room-btn:hover {
+    transform: scale(1.1);
+}
+
+
+.delete-room-btn:hover,
+.delete-room-btn:focus,
+.enter-room-btn:hover {
+    background: none !important; 
+    outline: none;
+    box-shadow: none;
+}
+
+/* Input & Buttons */
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(80, 60, 100, 0.8);
+    color: #f3e1ff;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    background: rgba(100, 80, 130, 0.9);
+    outline: none;
+    box-shadow: 0 0 8px rgba(180, 140, 255, 0.4);
+}
+
+button {
+    padding: 12px 20px;
+    background: linear-gradient(45deg, #7a4fc4, #a27ff2);
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #a27ff2, #c6a7ff);
+    box-shadow: 0 0 12px rgba(150, 110, 255, 0.3);
+}
+
+.room-card {
+    position: relative; /* Ensure buttons position correctly inside */
+    padding-bottom: 50px; /* Add space at the bottom for button */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .room-management {
+        flex-direction: column;
+    }
+}

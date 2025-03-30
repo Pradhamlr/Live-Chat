@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="css/room.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Room Info</h2>
+            <div class="room-info">
+                <p>Room Code: <span id="room-code">Loading...</span></p>
+            </div>
+            <div id="participants-list"></div>
+            <button class="leave-btn" onclick="leaveRoom()">Leave Room</button>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="chat-section">
+            <div class="chat-header">
+                <h3>Live Chat</h3>
+            </div>
+            <div class="messages-container" id="messages">
+                <!-- Messages will be appended here -->
+            </div>
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button id="sendMessage">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", fetchParticipants)
+
+        async function fetchParticipants() {
+            try {
+                const token = localStorage.getItem("token")
+                const roomCode = localStorage.getItem("roomCode")
+                const response = await axios.get("http://localhost:3000/api/v1/room/participants", {
+                    headers: {authorization: `Bearer ${token}`},
+                    params: { roomCode }
+                })
+                const participants = response.data.participants
+                const participantsList = document.getElementById("participants-list")
+                participantsList.innerHTML = ""
+
+                participants.forEach(participant => {
+                    const participantElement = document.createElement("div")
+                    participantElement.classList.add("participant")
+                    participantElement.innerHTML = `
+                        <img src="${participant.avatar}" alt="Avatar">
+                        <span>${participant.name}</span>
+                    `
+                    participantsList.appendChild(participantElement)
+                })
+            } catch (error) {
+                console.log("Error Fetching Participants", error)
+            }
+        }
+
+        function leaveRoom() {
+            window.location.href = "home.html"
+        }
+
+        const socket = io("http://localhost:3000")
+
+        const roomCode = localStorage.getItem("roomCode")
+        const userId = localStorage.getItem("userId")
+        document.getElementById("room-code").innerText = `${roomCode}`
+
+        if(roomCode) {
+            socket.emit("joinRoom", roomCode )
+        }
+
+
+        socket.on("receiveMessage", async (data) => {
+            // const avatar = localStorage.getItem("avatar")
+            try {
+                // const userId = localStorage.getItem("userId")
+                const token = localStorage.getItem("token")
+                const response = await axios.get(`http://localhost:3000/api/v1/user/${data.userId}`, {
+                    headers: {authorization: `Bearer ${token}`}
+                })
+                const avatar = response.data.user.avatar
+                const messagesDiv = document.getElementById("messages")
+                const messageElement = document.createElement("div")
+                messageElement.classList.add("message")
+                messageElement.innerHTML = `
+                    <img src=${avatar} class="message-avatar">
+                    <div class="message-content">
+                        <strong>${data.sender}:</strong>
+                        <span class="message-text">${data.message}</span> 
+                    </div>
+                    <span class="message-emoji">${data.emoji}</span>
+                `
+                messagesDiv.appendChild(messageElement)
+                messagesDiv.scrollTop = messagesDiv.scrollHeight
+            } catch (error) {
+                console.log("Error Recieving Message", error)
+            }
+        })
+
+        document.getElementById("sendMessage").addEventListener("click", (e) => {
+            e.preventDefault()
+            const message = document.getElementById("messageInput").value
+            
+            if(message) {
+                const sender = localStorage.getItem("userName")
+                const userId = localStorage.getItem("userId")
+                socket.emit("sendMessage", { roomCode, message, sender:`${sender}`, userId})
+                document.getElementById("messageInput").value = ""
+            }
+        })
+    </script>
+</body>
+</html>
+
