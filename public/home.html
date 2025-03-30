@@ -65,7 +65,7 @@
             try {
                 const token = localStorage.getItem("token")
                 const userId = localStorage.getItem("userId")
-                const response = await axios.get(`http://localhost:3000/api/v1/user/${userId}`, {
+                const response = await axios.get(`https://live-chat-a7yr.onrender.com/api/v1/user/${userId}`, {
                     headers: {authorization: `Bearer ${token}`}
                 })
                 const avatarUrl = response.data.user.avatar
@@ -81,7 +81,7 @@
         async function fetchUserRooms() {
             try {
                 const token = localStorage.getItem("token")
-                const response = await axios.get("http://localhost:3000/api/v1/room", {
+                const response = await axios.get("https://live-chat-a7yr.onrender.com/api/v1/room", {
                     headers: { authorization: `Bearer ${token}` }
                 })
                 const rooms = response.data.room
@@ -119,7 +119,7 @@
         async function enterRoom( roomId ) {
             try {
                 const token = localStorage.getItem("token")
-                const response = await axios.get(`http://localhost:3000/api/v1/room/${roomId}`, {
+                const response = await axios.get(`https://live-chat-a7yr.onrender.com/api/v1/room/${roomId}`, {
                     headers: {authorization: `Bearer ${token}`}
                 })
                 localStorage.setItem("roomCode", response.data.room.roomCode)
@@ -135,7 +135,7 @@
         async function deleteRoom( roomId ) {
             try {
                 const token = localStorage.getItem("token")
-                const response = await axios.delete(`http://localhost:3000/api/v1/room/${roomId}`, {
+                const response = await axios.delete(`https://live-chat-a7yr.onrender.com/api/v1/room/${roomId}`, {
                     headers: {authorization: `Bearer ${token}`}
                 })
                 console.log(`Room ${roomId} Deleted Successfully`, response.data)
@@ -151,7 +151,7 @@
             try {
                 const name = document.getElementById("roomName").value
                 const token = localStorage.getItem("token")
-                const response = await axios.post("http://localhost:3000/api/v1/room", {
+                const response = await axios.post("https://live-chat-a7yr.onrender.com/api/v1/room", {
                     name
                 }, {
                     headers: {authorization: `Bearer ${token}`}
@@ -175,7 +175,7 @@
 
                 console.log("Sending roomCode:", roomCode);
                 
-                const response = await axios.patch("http://localhost:3000/api/v1/room", { roomCode }, {
+                const response = await axios.patch("https://live-chat-a7yr.onrender.com/api/v1/room", { roomCode }, {
                     headers: {authorization: `Bearer ${token}`}
                 })
                 localStorage.setItem("roomCode", response.data.room.roomCode)

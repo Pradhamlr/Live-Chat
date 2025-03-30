@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="https://live-chat-a7yr.onrender.com/socket.io/socket.io.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", fetchParticipants)
 
@@ -42,7 +42,7 @@
             try {
                 const token = localStorage.getItem("token")
                 const roomCode = localStorage.getItem("roomCode")
-                const response = await axios.get("http://localhost:3000/api/v1/room/participants", {
+                const response = await axios.get("https://live-chat-a7yr.onrender.com/api/v1/room/participants", {
                     headers: {authorization: `Bearer ${token}`},
                     params: { roomCode }
                 })
@@ -68,7 +68,7 @@
             window.location.href = "home.html"
         }
 
-        const socket = io("http://localhost:3000")
+        const socket = io("https://live-chat-a7yr.onrender.com")
 
         const roomCode = localStorage.getItem("roomCode")
         const userId = localStorage.getItem("userId")
@@ -84,7 +84,7 @@
             try {
                 // const userId = localStorage.getItem("userId")
                 const token = localStorage.getItem("token")
-                const response = await axios.get(`http://localhost:3000/api/v1/user/${data.userId}`, {
+                const response = await axios.get(`https://live-chat-a7yr.onrender.com/api/v1/user/${data.userId}`, {
                     headers: {authorization: `Bearer ${token}`}
                 })
                 const avatar = response.data.user.avatar

@@ -3,7 +3,7 @@ const Room = require("../models/room")
 
 async function analyzeEmotion(message) {
     try {
-        const response = await axios.post('http://localhost:5000/analyze', { message });
+        const response = await axios.post('https://flask-emotion-api-f99j.onrender.com/analyze', { message });
         return response.data;
     } catch (error) {
         console.error('Error analyzing emotion:', error);
