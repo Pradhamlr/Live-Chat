@@ -96,7 +96,11 @@ body {
     white-space: nowrap; /* Prevent text from wrapping */
 }
 
-
+@media (max-width: 768px) { 
+    .avatar-container {
+        display: none;
+    }
+}
 
 .enter-room-btn {
     position: absolute;
@@ -156,6 +160,22 @@ body {
     align-items: center;
     margin-top: 10px;
 }
+
+/* On mobile screens (max-width: 768px), stack input and button */
+@media (max-width: 768px) {
+    .input-group {
+        flex-direction: column; /* Stack input and button */
+        width: 100%; /* Ensure it takes full width */
+    }
+
+    .input-group input {
+        width: 100%; /* Make input and button full-width */
+    }
+    .input-group button {
+        width: 50%;
+    }
+}
+
 
 .input-group input {
     flex: 1;

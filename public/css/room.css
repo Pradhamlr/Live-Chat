@@ -285,6 +285,97 @@ body {
     margin-right: 5px;
     vertical-align: middle;
 }
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    /* Adjust chat container layout */
+    .chat-container {
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+    }
+
+    /* Sidebar Adjustments */
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .room-info {
+        font-size: 18px;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    /* Remove Participants List */
+    #participants-list {
+        display: none;
+    }
+
+    /* Leave Button - Slightly Bigger */
+    .leave-btn {
+        width: auto;
+        padding: 10px 20px; /* Slightly larger */
+        font-size: 14px; /* Tiny bit bigger */
+        margin: 6px auto;
+        display: block;
+    }
+
+    /* Make Chat Section Larger */
+    .chat-section {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Input Area */
+    .input-area {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .input-area input {
+        flex: 1;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .input-area button {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    /* Make Messages Container Bigger */
+    .messages-container {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+    }
+
+    /* Messages - Fully Responsive */
+    .message {
+        max-width: 90%; /* Messages can now take more space */
+        font-size: 14px;
+        padding: 10px;
+        word-wrap: break-word;
+    }
+
+    /* Sent Messages */
+    .sent {
+        align-self: flex-end;
+    }
+
+    /* Received Messages */
+    .received {
+        align-self: flex-start;
+    }
+}
+
+
 /* 
 .message-text {
     display: inline-block;
